@@ -1,18 +1,19 @@
 <template>
     <!--<film-view :film="film"></film-view>-->
     <film-list :films="films"></film-list>
+    <!--<film-form></film-form>-->
 </template>
 <script>
 const API_URL = "http://localhost:8080/films"
 
-import filmView from "./components/filmDetails.vue"
+import filmDetails from "./components/filmDetails.vue"
 import filmList from "./components/filmList.vue"
-import Modal from './components/Modal.vue'
+import filmForm from "./components/filmForm.vue"
 export default {
     components:{
-        //filmView,
+        //filmDetails,
         filmList,
-        Modal
+        //filmForm
     },
     data() {
         return {
@@ -25,8 +26,7 @@ export default {
                 actors: "Leonardo",
                 description: "This is so good film!"
             },
-            films: [],
-            showModal: false
+            films: []
         }
     },
     created() {

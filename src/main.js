@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import { config } from 'dotenv'
 import App from './App.vue'
 
 import './assets/main.css'
