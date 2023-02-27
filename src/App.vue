@@ -1,16 +1,18 @@
 <template>
-    <film-view :film="film"></film-view>
+    <!--<film-view :film="film"></film-view>-->
     <film-list :films="films"></film-list>
 </template>
 <script>
-const API_URL = "http://localhost:8080/films/"
+const API_URL = "http://localhost:8080/films"
 
-import filmView from "./components/filmView.vue"
+import filmView from "./components/filmDetails.vue"
 import filmList from "./components/filmList.vue"
+import Modal from './components/Modal.vue'
 export default {
     components:{
-        filmView,
-        filmList
+        //filmView,
+        filmList,
+        Modal
     },
     data() {
         return {
@@ -23,7 +25,8 @@ export default {
                 actors: "Leonardo",
                 description: "This is so good film!"
             },
-            films: []
+            films: [],
+            showModal: false
         }
     },
     created() {
@@ -31,8 +34,9 @@ export default {
     },
     methods: {
         async fetchData(){
-            const url = `${API_URL}${this.id}`
-            this.film = await (await fetch(url)).json()
+            //const url = `${API_URL}${this.id}`
+            const url = `${API_URL}`
+            this.films = await (await fetch(url)).json()
         }
     }
 }

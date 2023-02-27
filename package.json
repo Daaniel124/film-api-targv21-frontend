@@ -2,6 +2,7 @@
   "name": "film-frontend-targv21",
   "version": "0.0.0",
   "scripts": {
+    "serve": "concurrently 'vite' \"cd ../../film-api-targv21/ && npm start\"",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview --port 4173"
@@ -11,6 +12,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.3",
+    "concurrently": "^7.6.0",
     "vite": "^3.0.9"
   }
 }
