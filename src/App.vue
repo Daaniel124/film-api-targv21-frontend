@@ -1,6 +1,6 @@
 <template>
     <!--<film-view :film="film"></film-view>-->
-    <film-list :films="films"></film-list>
+    <film-list :films="films" @deleted="removeItem"></film-list>
     <!--<film-form></film-form>-->
 </template>
 <script>
@@ -37,6 +37,10 @@ export default {
             //const url = `${API_URL}${this.id}`
             const url = `${API_URL}`
             this.films = await (await fetch(url)).json()
+        },
+        removeItem(id) {
+            console.log("Item ", id)
+            this.films.splice(this.films.map(i => i.id).indexOf(id), 1)
         }
     }
 }
