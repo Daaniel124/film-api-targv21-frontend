@@ -1,51 +1,28 @@
 <template>
-    <!--<film-view :film="film"></film-view>-->
-    <!--<film-list :films="films" @deleted="removeItem"></film-list>-->
-    <!--<film-form></film-form>-->
-    <user-tickets :ticketID="ticketID"></user-tickets>
+    <p>
+    <!-- use the router-link component for navigation. -->
+    <!-- specify the link by passing the `to` prop. -->
+    <!-- `<router-link>` will render an `<a>` tag with the correct `href` attribute -->
+    <router-link to="/">Go to Home</router-link>
+    <router-link to="/userTickets">Go to watch film</router-link>
+  </p>
+  <!-- route outlet -->
+  <!-- component matched by the route will render here -->
+  <router-view></router-view>
 </template>
 <script>
-const API_URL = "http://localhost:8080/films"
-
-import filmDetails from "./components/filmDetails.vue"
-import filmList from "./components/filmList.vue"
-import filmForm from "./components/filmForm.vue"
-import userTickets from "./components/userTickets.vue"
+import { RouterLink, RouterView} from 'vue-router';
 export default {
-    components:{
-        filmDetails,
-        filmList,
-        filmForm,
-        userTickets
-    },
-    data() {
-        return {
-            id: 10,
-            ticketID: 6,
-            film: {
-                title: "Avatar",
-                genre: "Adventure",
-                duration: "2:15:00",
-                producer: "Jim Kerry",
-                actors: "Leonardo",
-                description: "This is so good film!"
-            },
-            films: []
-        }
-    },
-    created() {
-        this.fetchData()
-    },
-    methods: {
-        async fetchData(){
-            //const url = `${API_URL}${this.id}`
-            const url = `${API_URL}`
-            this.films = await (await fetch(url)).json()
+        components: {
+            RouterLink,
+            RouterView
         },
-        removeItem(id) {
-            console.log("Item ", id)
-            this.films.splice(this.films.map(i => i.id).indexOf(id), 1)
+        data() {
+            return{}
         }
     }
-}
+
 </script>
+<style>
+
+</style>

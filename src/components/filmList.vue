@@ -98,13 +98,13 @@ import Modal from './Modal.vue'
                         const error = (data && data.error) || response.status
                         return Promise.reject(error)
                     }
+                    this.$emit("deleted", this.filmDeleteId)
                     this.filmDeleteId = 0
                 })
                 .catch(error => {
                     console.log("Film delete error: ", error)
                     this.error = error
                 })
-                this.$emit("deleted")
             }
         },
     }
