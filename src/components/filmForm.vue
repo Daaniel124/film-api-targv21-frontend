@@ -4,7 +4,7 @@
             Title:
             <input type="text" v-model="film.title">
         </label>
-        <label>
+        <!--<label>
             Genre:
             <input type="text" v-model="film.genre">
         </label>
@@ -23,7 +23,7 @@
         <label>
             Description:
             <input type="text" v-model="film.description">
-        </label>
+        </label>-->
 
         <button type="submit" @click="addFilm">Add film</button>
     </form>
@@ -38,11 +38,11 @@ export default {
         return {
             film: {
                 title: "",
-                genre: "",
+                /*genre: "",
                 duration: "",
                 producer: "",
                 actors: "",
-                description: ""
+                description: ""*/
             }
         }
     },
@@ -65,7 +65,7 @@ export default {
                         this.error = data.error
                         throw data.error
                     } else {
-                        this.film = { title: "", genre: "", duration: "", producer: "", actors: "", description: "" }
+                        this.film = { title: ""/*, genre: "", duration: "", producer: "", actors: "", description: "" */}
                     }
                 })
                 .catch(error => console.error("Error: ", error))

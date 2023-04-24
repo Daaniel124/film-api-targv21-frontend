@@ -1,12 +1,12 @@
 <template>
     <div>
         <h1>Film title: {{ currentFilm.title }}</h1>
-        <p>Genre: {{ currentFilm.genre }}</p>
+        <!--<p>Genre: {{ currentFilm.genre }}</p>
         <h3>Duration: {{ currentFilm.duration }}</h3>
         <p>Producer: {{ currentFilm.producer }}</p>
         <p>Actors: {{ currentFilm.actors }}</p>
         <p>Description: {{ currentFilm.description }}</p>
-        <!--<p>Session Date: {{ useDateFormating(currentFilm.session_date) }}</p>-->
+        <p>Session Date: {{ useDateFormating(currentFilm.session_date) }}</p>-->
     </div>
 </template>
 <script>
@@ -19,7 +19,7 @@ export default {
     },
     data() {
         return {
-            currentFilm: { title: "", genre: "", duration: "", producer: "", actors: "", description: "" }
+            currentFilm: { title: ""/*, genre: "", duration: "", producer: "", actors: "", description: "" */}
         }
     },
     mounted() {

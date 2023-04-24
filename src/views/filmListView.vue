@@ -1,7 +1,7 @@
 <template>
-    <!--<film-view :film="film"></film-view>-->
+    <!--<film-details :film="film"></film-details>-->
     <film-list :films="films" @deleted="removeItem"></film-list>
-    <!--<film-form></film-form>-->
+    <!--<film-form @submit="fetchData"></film-form>-->
 </template>
 <script>
 const API_URL = "http://localhost:8080/films"
@@ -17,15 +17,16 @@ export default {
     },
     data() {
         return {
-            id: 10,
-            ticketID: 6,
+            id: 4,
+            //ticketID: 6,
             film: {
+                //id: "",
                 title: "Avatar",
-                genre: "Adventure",
+                /*genre: "Adventure",
                 duration: "2:15:00",
                 producer: "Jim Kerry",
                 actors: "Leonardo",
-                description: "This is so good film!"
+                description: "This is so good film!"*/
             },
             films: []
         }

@@ -1,16 +1,16 @@
 <template>
-    <table>
-        <tr>
+    <table class="table">
+        <tr class="table thead th">
             <th>Title</th>
             <th></th>
             <th></th>
         </tr>
         <tr v-for="film in films" :key="film.id">
-            <td>{{ film.title }}</td>
-            <td>
+            <td class="table td">{{ film.title }}</td>
+            <td class="table td">
                 <button id="show-details-modal" @click="filmDetailId = film.id">Show Details</button>
             </td>
-            <td>
+            <td class="table td">
                 <button id="show-delete-modal" @click="filmDeleteId = film.id">Delete</button>
             </td>
         </tr>
@@ -19,7 +19,7 @@
     <Teleport to="body">
         <!-- use the modal component, pass in the prop -->
         <modal :show="filmDetailId !==0" @close="filmDetailId = 0">
-        <template #header>{{currentFilm.title}}</template>
+        <template #header>{{ currentFilm.title }}</template>
         <template #body>
             <filmView :film="currentFilm"></filmView>
         </template>
@@ -28,7 +28,7 @@
     <Teleport to="body">
         <!-- use the modal component, pass in the prop -->
         <modal :show="filmDeleteId !==0">
-        <template #header>Delete {{currentFilm.title}} ?</template>
+        <template #header>Delete {{ currentFilm.title }} ?</template>
         <template #body>
             Are you sure?
         </template>
