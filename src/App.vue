@@ -3,8 +3,10 @@
     <!-- use the router-link component for navigation. -->
     <!-- specify the link by passing the `to` prop. -->
     <!-- `<router-link>` will render an `<a>` tag with the correct `href` attribute -->
-    <router-link to="/">Go Home</router-link>
-    <router-link to="/userTickets">Go to watch film</router-link>
+    <router-link to="/">Home </router-link>
+    <router-link to="/sessions"> Sessions </router-link>
+    <router-link to="/tickets"> Tickets </router-link>
+    <router-link to="/poster"> Films </router-link>
   </nav>
   <!-- route outlet -->
   <!-- component matched by the route will render here -->

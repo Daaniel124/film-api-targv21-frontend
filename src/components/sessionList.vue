@@ -1,34 +1,42 @@
 <template>
     <table class="table">
         <tr class="table thead th">
-            <th>Title</th>
+            <th>ID</th>
+            <th>Film Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Tickets</th>
             <th></th>
             <th></th>
         </tr>
-        <tr v-for="film in films" :key="film.id">
-            <td class="table td">{{ film.title }}</td>
+        <tr v-for="session in sessions" :key="session.id">
+            <td class="table td">{{ session.id }}</td>
+            <td class="table td">{{ session.filmName }}</td>
+            <td class="table td">{{ session.session_date }}</td>
+            <td class="table td">{{ session.session_time }}</td>
+            <td class="table td">{{ session.tickets }}</td>
             <td class="table td">
-                <button id="show-details-modal" @click="filmDetailId = film.id">Show Details</button>
+                <button id="show-details-modal" @click="sessionDetailId = session.id">Show Details</button>
             </td>
             <td class="table td">
-                <button id="show-delete-modal" @click="filmDeleteId = film.id">Delete</button>
+                <button id="show-delete-modal" @click="sessionDeleteId = session.id">Delete</button>
             </td>
         </tr>
         
     </table>
     <Teleport to="body">
         <!-- use the modal component, pass in the prop -->
-        <modal :show="filmDetailId !==0" @close="filmDetailId = 0">
-        <template #header>{{ currentFilm.title }}</template>
+        <modal :show="sessionDetailId !==0" @close="sessionDetailId = 0">
+        <template #header>{{ currentSession.filmName }}</template>
         <template #body>
-            <filmView :film="currentFilm"></filmView>
+            <sessionView :session="currentSession"></sessionView>
         </template>
         </modal>
     </Teleport>
     <Teleport to="body">
         <!-- use the modal component, pass in the prop -->
-        <modal :show="filmDeleteId !==0">
-        <template #header>Delete {{ currentFilm.title }} ?</template>
+        <modal :show="sessionDeleteId !==0">
+        <template #header>Delete {{ currentSession.filmName }} ?</template>
         <template #body>
             Are you sure?
         </template>
@@ -36,18 +44,18 @@
         <div v-if="!error">
             <button
               class="modal-default-button button-danger"
-              @click="deleteFilm"
+              @click="deleteSession"
             >Yes</button>
             <button
               class="modal-default-button button-safe"
-              @click="filmDeleteId = 0"
+              @click="sessionDeleteId = 0"
             >No</button>
         </div>
         <div v-else>
             <span class="button-danger">{{ error }}</span>
             <button
               class="modal-default-button button-safe"
-              @click="filmDeleteId = 0"
+              @click="sessionDeleteId = 0"
             >No</button>
         </div>
         </template>
@@ -55,40 +63,40 @@
     </Teleport>
 </template>
 <script>
-import filmView from './filmDetails.vue'
+import sessionView from './sessionDetails.vue'
 import Modal from './Modal.vue'
     export default {
         components: {
             Modal,
-            filmView
+            sessionView
         },
         props: {
-            films: Array,
+            sessions: Array,
             require: true
         },
         emits: ["deleted"],
         data() {
             return {
-                filmDetailId: 0,
-                filmDeleteId: 0,
-                currentFilm: null,
+                sessionDetailId: 0,
+                sessionDeleteId: 0,
+                currentSession: null,
                 error: null
             }
         },
         watch: {
-            filmDetailId(newId, oldId) {
-                this.currentFilm = this.films.find((item)=> item.id == newId)
+            sessionDetailId(newId, oldId) {
+                this.currentSession = this.sessions.find((item)=> item.id == newId)
             },
-            filmDeleteId(newId, oldId) {
-                this.currentFilm = this.films.find((item)=> item.id == newId)
+            sessionDeleteId(newId, oldId) {
+                this.currentSession = this.sessions.find((item)=> item.id == newId)
                 this.error = null
             }
         },
         methods: {
-            deleteFilm() {
+            deleteSession() {
                 console.log("DELETE confirmed")
                 const api_url = "http://localhost:8080"
-                fetch(`${api_url}/films/${this.filmDeleteId}`, {
+                fetch(`${api_url}/sessions/${this.sessionDeleteId}`, {
                     method: "delete",
                 })
                 .then( async response => {
@@ -98,11 +106,11 @@ import Modal from './Modal.vue'
                         const error = (data && data.error) || response.status
                         return Promise.reject(error)
                     }
-                    this.$emit("deleted", this.filmDeleteId)
-                    this.filmDeleteId = 0
+                    this.$emit("deleted", this.sessionDeleteId)
+                    this.sessionDeleteId = 0
                 })
                 .catch(error => {
-                    console.log("Film delete error: ", error)
+                    console.log("Session delete error: ", error)
                     this.error = error
                 })
             }

@@ -4,7 +4,7 @@
             Title:
             <input type="text" v-model="film.title">
         </label>
-        <!--<label>
+        <label>
             Genre:
             <input type="text" v-model="film.genre">
         </label>
@@ -23,9 +23,9 @@
         <label>
             Description:
             <input type="text" v-model="film.description">
-        </label>-->
+        </label>
 
-        <button type="submit" @click="addFilm">Add film</button>
+        <button type="submit">Add film</button>
     </form>
     <p>
         <span v-for="error in errors">{{ error }}<br></span>
@@ -38,14 +38,16 @@ export default {
         return {
             film: {
                 title: "",
-                /*genre: "",
+                genre: "",
                 duration: "",
                 producer: "",
                 actors: "",
-                description: ""*/
-            }
+                description: ""
+            },
+            errors: null
         }
     },
+    emits: ["submit"],
     computed: {
         canSubmit() {
             return this.title.length > 0 && this.genre.length > 0
@@ -53,11 +55,12 @@ export default {
     },
     methods: {
         addFilm() {
-            const api_url = import.meta.env.VITE_API_URL
+            this.errors = null
+            const api_url = "http://localhost:8080"
             fetch(api_url + "/films", {
                 method: "post",
                 body: JSON.stringify(this.film),
-                headers: { 'Content-type': 'application/json; charset=UTF-8', }
+                headers: { 'Content-type': 'application/json; charset=UTF-8'},
             }).then((response) => { return response.json() })
                 .then((data) => {
                     console.log("Add film: ", data)
@@ -65,7 +68,8 @@ export default {
                         this.error = data.error
                         throw data.error
                     } else {
-                        this.film = { title: ""/*, genre: "", duration: "", producer: "", actors: "", description: "" */}
+                        this.film = { title: "", genre: "", duration: "", producer: "", actors: "", description: "" }
+                        this.$emit("submit")
                     }
                 })
                 .catch(error => console.error("Error: ", error))

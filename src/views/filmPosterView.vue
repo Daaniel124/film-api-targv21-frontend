@@ -1,24 +1,20 @@
 <template>
-    <!--<film-details :film="film"></film-details>-->
-    <film-list :films="films" @deleted="removeItem"></film-list>
-    <film-form @submit="fetchData"></film-form>
+    <!--<film-list :films="films" ></film-list>-->
+    <film-poster :films="films" ></film-poster>
 </template>
 <script>
 const API_URL = "http://localhost:8080/films"
-
-import filmDetails from "../components/filmDetails.vue"
 import filmList from "../components/filmList.vue"
-import filmForm from "../components/filmForm.vue"
+import filmPoster from "../components/filmPoster.vue"
+
 export default {
-    components:{
-        filmDetails,
-        filmList,
-        filmForm,
-    },
-    data() {
+        components: {
+            filmList,
+            filmPoster
+        },
+        data() {
         return {
             id: 4,
-            ticketID: 6,
             film: {
                 id: "",
                 title: "Avatar",
@@ -39,11 +35,10 @@ export default {
             //const url = `${API_URL}${this.id}`
             const url = `${API_URL}`
             this.films = await (await fetch(url)).json()
-        },
-        removeItem(id) {
-            console.log("Item ", id)
-            this.films.splice(this.films.map(i => i.id).indexOf(id), 1)
         }
     }
-}
+    }
 </script>
+<style>
+
+</style>
