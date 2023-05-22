@@ -1,5 +1,6 @@
 <template>
     <div>
+        <p>Film: {{ currentTicket.movie_session.film.title }}</p>
         <p>First Name: {{ currentTicket.firstName }}</p>
         <p>Last Name: {{ currentTicket.lastName }}</p>
         <p>Row: {{ currentTicket.row }}</p>
@@ -17,7 +18,18 @@ export default {
     },
     data() {
         return {
-            currentTicket: { firstName: "", lastName: "", row: "", columnNumber: "", price: ""}
+            currentTicket: { 
+                firstName: "", 
+                lastName: "", 
+                row: "", 
+                columnNumber: "", 
+                price: "", 
+                movie_session: {
+                    film: {
+                        title: ""
+                    }
+                }
+            }
         }
     },
     mounted() {
