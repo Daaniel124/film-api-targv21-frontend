@@ -5,7 +5,13 @@
             <th>Name</th>
             <th>Date</th>
             <th>Time</th>
-            <th>Film ID</th>
+            <th></th>
+        </tr>
+        <tr v-for="ticket in tickets" :key="ticket.id">
+            <td class="table td">{{ ticket.id }}</td>
+            <td class="table td">{{ ticket.firstName + " " +  ticket.lastName }}</td>
+            <td class="table td">{{ ticket.session_date }}</td>
+            <td class="table td">{{ ticket.session_time }}</td>
             <td class="table td">
                 <button id="show-details-modal" @click="ticketDetailId = ticket.id">Show Details</button>
             </td>
